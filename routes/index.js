@@ -1,9 +1,8 @@
 let express = require('express');
 let router = express.Router();
+let {tagdataAPI} = require('../constrollers/wirelesstagsAPIController');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/api', tagdataAPI);
 
 module.exports = router;

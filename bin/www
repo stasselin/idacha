@@ -7,10 +7,36 @@
 let app = require('../app');
 let debug = require('debug')('idacha:server');
 let http = require('http');
+let os = require('os');
+let ifaces = os.networkInterfaces();
+
 
 /**
  * Get port from environment and store in Express.
  */
+
+let ipAddress;
+
+Object.keys(ifaces).forEach((ifname) => {    let alias = 0;
+
+    ifaces[ifname].forEach(function (iface) {
+        if ('IPv4' !== iface.family || iface.internal !== false) {
+            // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+            return;
+        }
+
+        if (alias >= 1) {
+            // this single interface has multiple ipv4 addresses
+            console.log(ifname + ':' + alias, iface.address);
+            ipAddress = iface.address;
+        } else {
+            // this interface has only one ipv4 adress
+            console.log(ifname, iface.address);
+        }
+        ++alias;
+    });
+});
+
 
 let port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -58,7 +84,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port;
 
@@ -82,9 +108,9 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
+  let addr = '192.168.1.40';
+  let bind = typeof ipAddress === 'string'
+    ? 'pipe ' + ipAddress
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
