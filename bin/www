@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 
-mongoose.connect('mongodb://localhost/idacha');
+mongoose.connect('mongodb://Duskrunner:sselenPIMP2011@ds151014.mlab.com:51014/idacha');
 
 
 /**
@@ -114,8 +114,8 @@ function onError(error) {
 
 function onListening() {
   let addr = 'localhost';
-  let bind = typeof addr === 'string'
-    ? 'pipe ' + addr
+  let bind = typeof ipAddress === 'string'
+    ? 'pipe ' + ipAddress
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
