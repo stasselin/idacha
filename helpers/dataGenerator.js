@@ -3,7 +3,7 @@ mongoose.Promise = global.Promise;
 require('../Models/TagData');
 const TagData = mongoose.model('TagData');
 
-mongoose.connect('mongodb://localhost/idacha');
+
 
 
 let saveData = async () => {
