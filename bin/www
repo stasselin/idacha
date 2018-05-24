@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+import {dbUrl} from "../keys";
+
 /**
  * Module dependencies.
  */
@@ -11,9 +13,10 @@ let os = require('os');
 let ifaces = os.networkInterfaces();
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
+const {dbUrl} = require("../keys");
 
 
-mongoose.connect('mongodb://Duskrunner:sselenPIMP2011@ds151014.mlab.com:51014/idacha');
+mongoose.connect(dbUrl);
 
 
 /**

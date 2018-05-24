@@ -23,12 +23,3 @@ exports.windowSwitcher = async (req, res) => {
     res.json(updatedData);
 };
 
-exports.updateData = async (req, res) => {
-    let foundData = await  TagData.findOne({'name': 'Теплица'});
-    foundData.object_temp = Math.random()*(28-27) + 27;
-    foundData.air_pressure = Math.random()*(990 - 989) + 989;
-    foundData.humidity = Math.random()*(30-29) + 29;
-    await TagData.findByIdAndUpdate({_id: foundData.id}, foundData);
-    let updatedData = await  TagData.findOne({'name': 'Теплица'});
-    res.json(updatedData);
-};

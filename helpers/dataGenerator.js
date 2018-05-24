@@ -1,11 +1,14 @@
+
+
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 require('../Models/TagData');
 require('../Models/TagsLive');
 const TagData = mongoose.model('TagData');
 const TagsLive = mongoose.model('TagsLive');
+const {dbUrl} = require('../keys');
 
-mongoose.connect('mongodb://Duskrunner:sselenPIMP2011@ds151014.mlab.com:51014/idacha');
+mongoose.connect(dbUrl);
 
 
 let saveData = async () => {
